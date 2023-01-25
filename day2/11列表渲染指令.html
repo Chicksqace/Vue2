@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+</head>
+<body>
+    <!-- 我们希望Vue能控制下面这个div，帮我们把数据填充到div内部里面 -->
+    <div id="app">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <th>索引</th>
+                <th>ID</th>
+                <th>姓名</th>
+            </thead>
+            <tbody>
+                <!-- 官方建议：只要用到了v-for指令，那么一定要绑定一个:key属性 -->
+                <!-- 而且，尽量把id作为key的值 -->
+                <!-- 官方对key的值类型，是有要求的:字符串或数字类型 -->
+                <!-- key的值千万不能重复的，否则会终端报错:Duplicate keys detected -->
+                <tr v-for="(item,index) in list" :key="item.id">
+                    <td >{{index}}</td>
+                    <td >{{item.id}}</td>
+                    <td >{{item.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 1.导入Vue的库文件，在window全局有了Vue这个构造函数 -->
+    <script src="./lib/vue-2.6.12.js"></script>
+    <!-- 2.创建Vue的实例对象 -->
+    <script>
+        const vm=new Vue({
+            // el属性是固定的写法，表示当前的vm实例要控制页面上的那个区域，接收的值是一个选择器
+            el:"#app",
+            // data对象就是要渲染到页面上的数据
+            data:{
+                list:[
+                    {id:1,name:'张三'},
+                    {id:2,name:'李四'},
+                    {id:3,name:'张三'},
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

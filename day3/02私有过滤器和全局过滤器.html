@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">{{message | capi}}</div>
+    <div id="app2">{{message | capi}}</div>
+    <script src="./lib/vue-2.6.12.js"></script>
+    <script>
+        // 使用 Vue.filter()定义全局过滤器
+        Vue.filter('capi',function(str){
+            return str.replace(str[0],str[0].toUpperCase())+"-----";
+        })
+        const vm=new Vue({
+            el:'#app',
+            data:{
+                message:'hello vue'
+            },
+            // 过滤器函数，必须被定义到filters节点下面
+            // 过滤器本质就是一个函数
+            filters:{
+                // 注意：过滤器函数形参中的val，永远都是管道符前面的那个值
+                capi(val){
+                    //字符串有charAt方法，这个方法接收索引值，表示从字符串中把索引对应的字符，获取过来 
+                    val.charAt(0)
+                    // 强调：过滤器中，一定要有一个返回值
+                    return val.replace(val[0],val[0].toUpperCase());
+                }
+            }
+        })
+        // ---------------------------------
+        const vm2=new Vue({
+            el:'#app2',
+            data:{
+                message:'hello vue'
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./lib/axios.js"></script>
+    <button id="btnPost">发起POST请求</button>
+    <button id="btnGet">发起Get请求</button>
+
+    <script>
+        document.querySelector("#btnPost").addEventListener('click',async function(){
+            const {data}= await axios({
+                method:'post',
+                url:'http://www.liulongbin.top:3006/api/post',
+                data:{
+                    name:'zs',
+                    age:20
+                }
+            })
+            console.log(data);
+        })
+        document.querySelector("#btnGet").addEventListener('click',async function(){
+            // 解构赋值的时候，使用:进行重命名
+            // 1.调用axios之后，使用async/await进行简化
+            // 2.使用解构赋值，从axios封装的大对象中，把data属性解构出来
+            // 3.把解构出来的data属性，使用冒号进行重命名，一般都重命名为{data:res}
+            const {data : res}= await axios({
+                method:'get',
+                url:'http://www.liulongbin.top:3006/api/getbooks',
+            })
+            console.log(res.data);
+        })
+    </script>
+</body>
+</html>
